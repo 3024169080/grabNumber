@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <title>lin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      width: 400px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      text-align: left;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>请输入</h1>
+    <form id="registerForm">
+      <label for="token">token:</label>
+      <input type="text" id="token" name="token" required><br><br>
+      <label for="eid">eid:</label>
+      <input type="text" id="eid" name="eid" required><br><br>
+      <input type="submit" value="提交">
+    </form>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $('#registerForm').on('submit', function (event) {
+        event.preventDefault(); // 阻止表单默认提交行为
+
+        $.ajax({
+          url: '/register',
+          type: 'POST',
+          data: $(this).serialize(),
+          success: function (response) {
+            alert('请求已发送');
+          },
+          error: function (xhr, status, error) {
+            alert('请求失败，请重试。');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

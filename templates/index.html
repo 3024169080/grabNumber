@@ -59,13 +59,29 @@
     input[type="submit"]:hover {
       background-color: #45a049;
     }
+
+    button {
+      background-color: #008CBA;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background-color: #007B9E;
+    }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
   <div class="container">
-    <h1>请输入</h1>
+    <p>1、抢号前先点击建立连接</p>
+    <p>2、抢号时间到再点击抢号按钮</p>
+    <button id="connectButton">建立连接</button>
     <form id="registerForm">
       <label for="token">token:</label>
       <input type="text" id="token" name="token" required value="6c92edd683f04904b0250d85751f1749"><br><br>
@@ -77,6 +93,22 @@
 
   <script>
     $(document).ready(function () {
+      $('#connectButton').on('click', function () {
+        const token = $('#token').val();
+        const eid = $('#eid').val();
+        $.ajax({
+          url: '/details',
+          type: 'GET',
+          data: { token: token, eid: eid },
+          success: function (response) {
+            console.log('连接已建立');
+          },
+          error: function (xhr, status, error) {
+            console.log('连接失败，请重试。');
+          }
+        });
+      });
+
       $('#registerForm').on('submit', function (event) {
         event.preventDefault(); // 阻止表单默认提交行为
 
@@ -85,10 +117,10 @@
           type: 'POST',
           data: $(this).serialize(),
           success: function (response) {
-            alert('请求已发送');
+            console.log('请求已发送');
           },
           error: function (xhr, status, error) {
-            alert('请求失败，请重试。');
+            console.log('请求失败，请重试。');
           }
         });
       });

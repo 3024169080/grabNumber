@@ -1,10 +1,31 @@
+from flask import Flask, request, render_template, jsonify
 from grabNumber import RegistrationClient
-def trigger_register():
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/details', methods=['GET'])
+def details():
+    token = request.args.get('token')
+    eid = request.args.get('eid')
+    base_url = "https://api-xcx-qunsou.weiyoubot.cn"  # 替换为实际的基础 URL
+    client = RegistrationClient(base_url)
+    item_details = client.get_item_details(token, eid)
+    if item_details:
+        return jsonify(item_details)
+    else:
+        return jsonify({"error": "获取项目参数失败"}), 400
+
+@app.route('/register', methods=['POST'])
+def register():
     base_url = "https://api-xcx-qunsou.weiyoubot.cn"  # 替换为实际的基础 URL
     client = RegistrationClient(base_url)
     
-    token = "6c92edd683f04904b0250d85751f1749"  # 替换为实际的 token
-    eid = "67c94c7c6cbec7797aa1bf74"  # 替换为实际的 eid
+    token = request.form['token']
+    eid = request.form['eid']
     info = [
         {
             "field_name": "姓名",
@@ -12,7 +33,8 @@ def trigger_register():
             "field_key": 1
         }
     ]
-    client.register(token, eid, info)
-    print("请求已发送")
+    response = client.register(token, eid, info)
+    return jsonify(response)
 
-trigger_register()
+if __name__ == '__main__':
+    app.run(debug=True)

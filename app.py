@@ -3,6 +3,10 @@ from grabNumber import RegistrationClient
 
 app = Flask(__name__)
 
+# 在应用启动时创建全局的 RegistrationClient 实例
+base_url = "https://api-xcx-qunsou.weiyoubot.cn"  # 替换为实际的基础 URL
+client = RegistrationClient(base_url)
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -11,8 +15,6 @@ def index():
 def details():
     token = request.args.get('token')
     eid = request.args.get('eid')
-    base_url = "https://api-xcx-qunsou.weiyoubot.cn"  # 替换为实际的基础 URL
-    client = RegistrationClient(base_url)
     item_details = client.get_item_details(token, eid)
     if item_details:
         return jsonify(item_details)
@@ -21,15 +23,12 @@ def details():
 
 @app.route('/register', methods=['POST'])
 def register():
-    base_url = "https://api-xcx-qunsou.weiyoubot.cn"  # 替换为实际的基础 URL
-    client = RegistrationClient(base_url)
-    
     token = request.form['token']
     eid = request.form['eid']
     info = [
         {
             "field_name": "姓名",
-            "field_value": "林",
+            "field_value": "金菲菲",
             "field_key": 1
         }
     ]

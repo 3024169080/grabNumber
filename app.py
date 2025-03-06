@@ -1,19 +1,10 @@
-from flask import Flask, request, render_template
 from grabNumber import RegistrationClient
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/register', methods=['POST'])
-def register():
+def trigger_register():
     base_url = "https://api-xcx-qunsou.weiyoubot.cn"  # 替换为实际的基础 URL
     client = RegistrationClient(base_url)
     
-    token = request.form['token']
-    eid = request.form['eid']
+    token = "6c92edd683f04904b0250d85751f1749"  # 替换为实际的 token
+    eid = "67c94c7c6cbec7797aa1bf74"  # 替换为实际的 eid
     info = [
         {
             "field_name": "姓名",
@@ -22,7 +13,6 @@ def register():
         }
     ]
     client.register(token, eid, info)
-    return "请求已发送"
+    print("请求已发送")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+trigger_register()

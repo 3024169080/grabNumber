@@ -28,7 +28,7 @@ def register():
     info = [
         {
             "field_name": "姓名",
-            "field_value": "金菲菲",
+            "field_value": "林",
             "field_key": 1
         }
     ]

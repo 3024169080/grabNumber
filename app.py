@@ -28,11 +28,13 @@ def register():
     info = [
         {
             "field_name": "姓名",
-            "field_value": "林",
+            "field_value": "徐艳茹",
             "field_key": 1
         }
     ]
     response = client.register(token, eid, info)
+    # 打印接口返回的数据
+    print("接口返回的数据：", response)
     return jsonify(response)
 
 if __name__ == '__main__':

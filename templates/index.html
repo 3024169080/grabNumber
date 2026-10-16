@@ -23,6 +23,9 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       text-align: center;
       box-sizing: border-box;
+      position: absolute;
+      right: 0;
+      top: 0;
     }
 
     form {
@@ -50,7 +53,7 @@
     input[type="submit"] {
       background-color: #4CAF50;
       color: white;
-      padding: 10px 20px;
+      padding: 20px 20px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -79,13 +82,12 @@
 
 <body>
   <div class="container">
-    <h1>请输入</h1>
-    <button id="connectButton">建立连接</button>
+    <button id="connectButton">测试</button>
     <form id="registerForm">
       <label for="token">token:</label>
-      <input type="text" id="token" name="token" required value="0f6270a472e24cb89e85957f1af03007"><br><br>
+      <input type="text" id="token" name="token" required value="816dbe1f21b346a98e2a65d860961528"><br><br>
       <label for="eid">eid:</label>
-      <input type="text" id="eid" name="eid" required value="67ca92e8c43c1ec849d3c585"><br><br>
+      <input type="text" id="eid" name="eid" required value="6ad18a353565ac3d1ef9906e"><br><br>
       <input type="submit" value="提交">
     </form>
   </div>
